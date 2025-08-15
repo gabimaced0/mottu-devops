@@ -36,5 +36,27 @@ Aplicação Java com API REST que realiza CRUD completo sobre a entidade **Moto*
 
 ```properties
 jdbc:sqlserver://rm558962.database.windows.net:1433;database=dbmottu;user=mottuuser@rm558962;password=SENHA_AQUI;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+```
 
+## Como rodar
+
+Passos:
+1. Criar o Banco de Dados SQL na Azure
+
+2. Criar Azure Container Registry (ACR)
+
+3. Clonar repositório
+https://github.com/RafaMacoto/SprintJavaPz.git
+
+4. Fazer Login no Azure
+
+5. Abra o Docker Desktop
+
+6. Fazer login no ACR
+
+7. Buildar e subir a imagem (TERMINAL)
+
+8. Criar Azure Container Instance (ACI)
+
+9. Acesse a URL pública do container + endpoint da sua API
 
