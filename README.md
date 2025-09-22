@@ -46,83 +46,83 @@ Passos:
 2. Criar Azure Container Registry (ACR)
 
 3. Clonar repositório
-https://github.com/RafaMacoto/SprintJavaPz.git
+- https://github.com/RafaMacoto/SprintJavaPz.git
 
 4. Fazer Login no Azure
-az login
+- az login
 
 5. Abra o Docker Desktop
 
 6. Fazer login no ACR
-az acr login --name mottuacr
+- az acr login --name mottuacr
 
 7. Buildar e subir a imagem (TERMINAL)
-docker build -t mottuacr.azurecr.io/mottu-backend:latest .
-docker push mottuacr.azurecr.io/mottu-backend:latest
+- docker build -t mottuacr.azurecr.io/mottu-backend:latest .
+- docker push mottuacr.azurecr.io/mottu-backend:latest
 
 8. Criar Azure Container Instance (ACI)
-Imagem: mottuacr.azurecr.io/mottu-backend:latest
-Origem: Azure Container Registry
-Porta:8080
+- Imagem: mottuacr.azurecr.io/mottu-backend:latest
+- Origem: Azure Container Registry
+- Porta:8080
 
 9. Acesse a URL pública do container + endpoint da sua API
 
 ## Testes
-Criar usuário
-http://<>IP-PUBLICO:8080/users
-{
-	"nome": "Gabrielly Macedo", 
- 	"email": "gabrielly.cmacedo@gmail.com", 
-	"role": "ADMIN", 
-	"senha": "senhaSegura123"
-}
-{
-	"nome": "Bianca Gamo", 
- 	"email": "bianca.gamo@gmail.com", 
-	"role": "ADMIN", 
-	"senha": "senhaSegura123"
-}
 
-Logar 
-http://<>IP-PUBLICO:8080/login
-{"email": "gabrielly.cmacedo@gmail.com", "password": "senhaSegura123"}
-
-Criar ala
-http://<IP-PUBLICO>:8080/alas
-{"nome": "DISPONIVEL"}
-{"nome": "MANUTENCAO"}
-
-Criar moto
-http://<IP-PUBLICO>:8080/motos
-{
-	"modelo": "Honda CG 160",
-	"status": "DISPONIVEL",
-	"posicao": "Sao Paulo",
-	"problema": null,
-	"placa": "ABC-1234",
-	"alaId": 1
-}
-{
-	"modelo": "NMAX 160",
-	"status": "DISPONIVEL",
-	"posicao": "Sao Paulo",
-	"problema": null,
-	"placa": "DPR-1234",
-	"alaId": 1
-}
-
-Uptade na NMAX para MANUTENÇÃO
-http://<IP-PUBLICO>:8080/motos/{id}
-{
-	"modelo": "NMAX 160",
-	"status": "MANUTENCAO",
-	"posicao": "Sao Paulo",
-	"problema": null,
-	"placa": "DPR-1234",
-	"alaId": 2
-}
-
-Excluir Moto
-http://<IP-PUBLICO>:8080/motos/{id}
-
+- Criar usuário
+- http://<>IP-PUBLICO:8080/users
+- {
+- 	"nome": "Gabrielly Macedo", 
+-  	"email": "gabrielly.cmacedo@gmail.com", 
+- 	"role": "ADMIN", 
+- 	"senha": "senhaSegura123"
+- }
+- {
+- 	"nome": "Bianca Gamo", 
+-  	"email": "bianca.gamo@gmail.com", 
+- 	"role": "ADMIN", 
+- 	"senha": "senhaSegura123"
+- }
+- 
+- Logar 
+- http://<>IP-PUBLICO:8080/login
+- {"email": "gabrielly.cmacedo@gmail.com", "password": "senhaSegura123"}
+- 
+- Criar ala
+- http://<IP-PUBLICO>:8080/alas
+- {"nome": "DISPONIVEL"}
+- {"nome": "MANUTENCAO"}
+- 
+- Criar moto
+- http://<IP-PUBLICO>:8080/motos
+- {
+- 	"modelo": "Honda CG 160",
+- 	"status": "DISPONIVEL",
+- 	"posicao": "Sao Paulo",
+- 	"problema": null,
+- 	"placa": "ABC-1234",
+- 	"alaId": 1
+- }
+- {
+- 	"modelo": "NMAX 160",
+- 	"status": "DISPONIVEL",
+- 	"posicao": "Sao Paulo",
+- 	"problema": null,
+- 	"placa": "DPR-1234",
+- 	"alaId": 1
+- }
+- 
+- Uptade na NMAX para MANUTENÇÃO
+- http://<IP-PUBLICO>:8080/motos/{id}
+- {
+- 	"modelo": "NMAX 160",
+- 	"status": "MANUTENCAO",
+- 	"posicao": "Sao Paulo",
+- 	"problema": null,
+- 	"placa": "DPR-1234",
+- 	"alaId": 2
+- }
+- 
+- Excluir Moto
+- http://<IP-PUBLICO>:8080/motos/{id}
 
