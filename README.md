@@ -28,14 +28,14 @@ Aplicação Java com API REST que realiza CRUD completo sobre a entidade **Moto*
 
 ## Banco de Dados em Nuvem (Azure SQL)
 
-- Banco: `dbmottu`
-- Servidor: `rm558962.database.windows.net`
+- Banco: `db-mottu`
+- Server: `rm558962`
 - Usuário: `mottuuser`
 - Conexão: configurada via variável de ambiente `SPRING_DATASOURCE_URL`
 - Conexão JDBC (exemplo):
 
 ```properties
-jdbc:sqlserver://rm558962.database.windows.net:1433;database=dbmottu;user=mottuuser@rm558962;password=SENHA_AQUI;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+jdbc:sqlserver://rm558962.database.windows.net:1433;database=db-mottu;user=mottuuser@rm558962;password=SENHA_AQUI;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
 ```
 
 ## Como rodar
@@ -49,14 +49,80 @@ Passos:
 https://github.com/RafaMacoto/SprintJavaPz.git
 
 4. Fazer Login no Azure
+az login
 
 5. Abra o Docker Desktop
 
 6. Fazer login no ACR
+az acr login --name mottuacr
 
 7. Buildar e subir a imagem (TERMINAL)
+docker build -t mottuacr.azurecr.io/mottu-backend:latest .
+docker push mottuacr.azurecr.io/mottu-backend:latest
 
 8. Criar Azure Container Instance (ACI)
+Imagem: mottuacr.azurecr.io/mottu-backend:latest
+Origem: Azure Container Registry
+Porta:8080
 
 9. Acesse a URL pública do container + endpoint da sua API
+
+## Testes
+Criar usuário
+http://<>IP-PUBLICO:8080/users
+{
+	"nome": "Gabrielly Macedo", 
+ 	"email": "gabrielly.cmacedo@gmail.com", 
+	"role": "ADMIN", 
+	"senha": "senhaSegura123"
+}
+{
+	"nome": "Bianca Gamo", 
+ 	"email": "bianca.gamo@gmail.com", 
+	"role": "ADMIN", 
+	"senha": "senhaSegura123"
+}
+
+Logar 
+http://<>IP-PUBLICO:8080/login
+{"email": "gabrielly.cmacedo@gmail.com", "password": "senhaSegura123"}
+
+Criar ala
+http://<IP-PUBLICO>:8080/alas
+{"nome": "DISPONIVEL"}
+{"nome": "MANUTENCAO"}
+
+Criar moto
+http://<IP-PUBLICO>:8080/motos
+{
+	"modelo": "Honda CG 160",
+	"status": "DISPONIVEL",
+	"posicao": "Sao Paulo",
+	"problema": null,
+	"placa": "ABC-1234",
+	"alaId": 1
+}
+{
+	"modelo": "NMAX 160",
+	"status": "DISPONIVEL",
+	"posicao": "Sao Paulo",
+	"problema": null,
+	"placa": "DPR-1234",
+	"alaId": 1
+}
+
+Uptade na NMAX para MANUTENÇÃO
+http://<IP-PUBLICO>:8080/motos/{id}
+{
+	"modelo": "NMAX 160",
+	"status": "MANUTENCAO",
+	"posicao": "Sao Paulo",
+	"problema": null,
+	"placa": "DPR-1234",
+	"alaId": 2
+}
+
+Excluir Moto
+http://<IP-PUBLICO>:8080/motos/{id}
+
 
